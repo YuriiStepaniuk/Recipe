@@ -37,7 +37,7 @@ export default function RecipeList() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <RecipeSelectFilter onApplyFilter={(newFilter) => setFilter(newFilter)} />
+      <RecipeSelectFilter />
       {recipes &&
         recipes.map((recipe) => (
           <RecipeCard

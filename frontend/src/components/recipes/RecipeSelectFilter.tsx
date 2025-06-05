@@ -1,15 +1,14 @@
 'use client';
 
+import { Route } from '@/enums/routes.enum';
 import { RecipeFilter } from '@/types/recipe';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 
-interface RecipeSelectFilterProps {
-  onApplyFilter: (filter: RecipeFilter) => void;
-}
+const RecipeSelectFilter = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-const RecipeSelectFilter: React.FC<RecipeSelectFilterProps> = ({
-  onApplyFilter,
-}) => {
   const [filterType, setFilterType] = useState<RecipeFilter['filterType'] | ''>(
     ''
   );
@@ -19,10 +18,22 @@ const RecipeSelectFilter: React.FC<RecipeSelectFilterProps> = ({
     setFilterValue(e.target.value);
   };
 
-  const handleApply = () => {
-    if (!filterValue.trim() || filterType === '') return;
-    onApplyFilter({ filterType, filterValue: filterValue.trim() });
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (filterValue.trim()) {
+      params.set('filterType', filterType);
+      params.set('filterValue', filterValue.trim());
+    } else {
+      params.delete('filterType');
+      params.delete('filterValue');
+    }
+
+    router.push(`${Route.RECIPE}?${params.toString()}`);
   };
+
   return (
     <div className="max-w-md mx-auto p-4 bg-white rounded shadow space-y-4">
       <div className="flex items-center space-x-4">
@@ -56,7 +67,7 @@ const RecipeSelectFilter: React.FC<RecipeSelectFilterProps> = ({
       <button
         className="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition cursor-pointer"
         disabled={!filterValue.trim()}
-        onClick={handleApply}
+        onClick={handleSubmit}
       >
         Confirm
       </button>
