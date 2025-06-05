@@ -30,7 +30,7 @@ export default function RecipeList() {
     setReady(true);
   }, [searchParams]);
 
-  const { recipes, isLoading } = useFetchRecipes(ready ? filter : undefined);
+  const { recipes, isLoading } = useFetchRecipes(filter, ready);
 
   if (isLoading) return <p className="text-center">Loading...</p>;
   if (!recipes) return <p className="text-center">No recipes found.</p>;
