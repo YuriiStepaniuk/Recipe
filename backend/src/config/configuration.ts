@@ -3,6 +3,8 @@ const configuration = () => ({
 
   env: process.env.NODE_ENV,
 
+  frontEndUrl: process.env.FRONT_END_URL,
+
   mealApiUrl: process.env.MEALDB_API_BASE_URL,
 });
 

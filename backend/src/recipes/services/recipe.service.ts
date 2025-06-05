@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { ConfigType } from 'src/config/configuration';
-import { RecipeFilterDto } from '../dtos/recipe-filter';
-import { Recipe } from '../types/recipe.type';
+import { Recipe, RecipeFilter } from '../types/recipe.type';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
@@ -17,7 +16,7 @@ export class RecipeService {
     this.apiBaseUrl = configService.get('mealApiUrl')!;
   }
 
-  async findAll(filter?: RecipeFilterDto): Promise<Recipe[]> {
+  async findAll(filter?: RecipeFilter): Promise<Recipe[]> {
     const query = this.buildQuery(filter);
     const url = `${this.apiBaseUrl}/${query}`;
     const response = await firstValueFrom(this.http.get(url));
@@ -30,10 +29,13 @@ export class RecipeService {
     return response.data.meals ? response.data.meals[0] : null;
   }
 
-  private buildQuery(filter?: RecipeFilterDto): string {
-    if (filter?.ingredient) return `filter.php?i=${filter.ingredient}`;
-    if (filter?.area) return `filter.php?a=${filter.area}`;
-    if (filter?.category) return `filter.php?c=${filter.category}`;
+  private buildQuery(filter?: RecipeFilter): string {
+    if (filter?.filterType === 'ingredients')
+      return `filter.php?i=${encodeURIComponent(filter.filterValue)}`;
+    if (filter?.filterType === 'area')
+      return `filter.php?a=${encodeURIComponent(filter.filterValue)}`;
+    if (filter?.filterType === 'category')
+      return `filter.php?c=${encodeURIComponent(filter.filterValue)}`;
     return 'search.php?s=';
   }
 }

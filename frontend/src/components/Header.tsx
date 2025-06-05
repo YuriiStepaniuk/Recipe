@@ -1,3 +1,4 @@
+import { Route } from '@/enums/routes.enum';
 import Link from 'next/link';
 
 const Header = () => {
@@ -10,8 +11,13 @@ const Header = () => {
         <nav>
           <ul className="flex space-x-6">
             <li>
-              <Link href="/" className="hover:text-blue-300">
+              <Link href={Route.ROOT} className="hover:text-blue-300">
                 Home
+              </Link>
+            </li>
+            <li>
+              <Link href={Route.RECIPE} className="hover:text-blue-300">
+                Recipes
               </Link>
             </li>
           </ul>

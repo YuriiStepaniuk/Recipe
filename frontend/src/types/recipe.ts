@@ -2,19 +2,17 @@ export type Recipe = {
   idMeal: string;
   strMeal: string;
   strMealThumb: string;
-};
-
-export type RecipeDetails = {
-  idMeal: string;
-  strMeal: string;
-  strCategory: string;
   strArea: string;
+  strCategory: string;
   strInstructions: string;
-  strMealThumb: string;
-  strTags?: string;
-  strYoutube?: string;
   [key: string]: any;
 };
+
+export interface RecipeQueryParams {
+  ingredient?: string;
+  category?: string;
+  area?: string;
+}
 
 export type RecipeFilter = {
   filterType: 'ingredients' | 'area' | 'category';

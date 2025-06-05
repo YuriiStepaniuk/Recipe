@@ -1,15 +1,11 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { FilterTypeEnum } from '../enums/filter-type.enum';
 
 export class RecipeFilterDto {
-  @IsOptional()
-  @IsString()
-  ingredient?: string;
+  @IsEnum(FilterTypeEnum)
+  filterType: FilterTypeEnum;
 
-  @IsOptional()
   @IsString()
-  area?: string;
-
-  @IsOptional()
-  @IsString()
-  category?: string;
+  @IsNotEmpty()
+  filterValue: string;
 }
