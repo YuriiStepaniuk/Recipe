@@ -14,7 +14,7 @@ cd ./Recipe
 Navigate to the Backend directory and follow its instructions:
 
 ```bash
-cd backend
+cd ./backend
 ```
 
 Please refer to the README.md file within the backend directory for detailed setup, configuration, and running instructions.
@@ -23,7 +23,7 @@ Ensure the backend is running before proceeding to the frontend.
 Navigate to the Frontend directory and follow its instructions:
 
 ```bash
-cd ../frontend
+cd ./frontend
 ```
 
 Please refer to the README.md file within the frontend directory for detailed setup, configuration, and running instructions.
