@@ -7,8 +7,8 @@ To set up and run this application locally, please follow these steps:
 Clone the repository:
 
 ```bash
-git clone [your-repository-url]
-cd [your-repository-name]
+git clone https://github.com/YuriiStepaniuk/Recipe.git
+cd ./Recipe
 ```
 
 Navigate to the Backend directory and follow its instructions:
